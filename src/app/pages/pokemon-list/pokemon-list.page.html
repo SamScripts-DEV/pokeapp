@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Lista de Pokémon</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar
+      placeholder="Buscar Pokémon"
+      (ionInput)="filterPokemons($event)"
+      debounce="500">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list *ngIf="filteredPokemons.length > 0; else loading">
+    <ion-item *ngFor="let pokemon of filteredPokemons" (click)="openPokemonDetailModal(pokemon)">
+      <ion-avatar slot="start">
+        <img [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + (pokemon.url.split('/')[6]) + '.png'" alt="Imagen de {{ pokemon.name }}" />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ pokemon.name | titlecase }}</h2>
+      </ion-label>
+      <ion-button fill="outline" size="small" slot="end">
+        Ver detalles
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #loading>
+    <div class="ion-text-center">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Cargando Pokémon...</p>
+    </div>
+  </ng-template>
+</ion-content>

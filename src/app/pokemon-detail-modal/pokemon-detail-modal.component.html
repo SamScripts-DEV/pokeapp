@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar color="primary"></ion-toolbar>
+    <ion-title>Detalles del Pokémon</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button expand="full" color="danger" (click)="dismiss()">Cerrar</ion-button>
+  
+  <div *ngIf="pokemonDetails" class="pokemon-details">
+    <!-- Mostrar la imagen del Pokémon -->
+    <ion-avatar class="pokemon-avatar"></ion-avatar>
+      <img [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + pokemonDetails.id + '.png'" alt="Imagen de {{ pokemonDetails.name }}" />
+    </ion-avatar>
+    
+    <!-- Mostrar el nombre del Pokémon -->
+    <ion-label class="pokemon-name"></ion-label>
+      <h2>{{ pokemonDetails.name | titlecase }}</h2>
+    </ion-label>
+
+    <!-- Mostrar las estadísticas -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Estadísticas</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let stat of pokemonDetails.stats">
+            <ion-label>{{ stat.stat.name | titlecase }}: {{ stat.base_stat }}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Mostrar tipos -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Tipos</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let type of pokemonDetails.types">
+            <ion-label>{{ type.type.name | titlecase }}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Si no se han cargado detalles, mostrar mensaje de carga -->
+  <ion-spinner *ngIf="!pokemonDetails" name="crescent"></ion-spinner>
+</ion-content>
+
+<style>
+  .pokemon-details {
+    text-align: center;
+    padding: 16px;
+  }
+
+  .pokemon-avatar {
+    margin: 0 auto;
+    width: 150px;
+    height: 150px;
+  }
+
+  .pokemon-name {
+    margin-top: 16px;
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+
+  ion-card {
+    margin-top: 16px;
+  }
+</style>
