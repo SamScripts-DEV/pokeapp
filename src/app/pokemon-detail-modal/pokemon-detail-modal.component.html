@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary"></ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Detalles del Pokémon</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,12 +9,12 @@
   
   <div *ngIf="pokemonDetails" class="pokemon-details">
     <!-- Mostrar la imagen del Pokémon -->
-    <ion-avatar class="pokemon-avatar"></ion-avatar>
+    <ion-avatar class="pokemon-avatar">
       <img [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + pokemonDetails.id + '.png'" alt="Imagen de {{ pokemonDetails.name }}" />
     </ion-avatar>
     
     <!-- Mostrar el nombre del Pokémon -->
-    <ion-label class="pokemon-name"></ion-label>
+    <ion-label class="pokemon-name">
       <h2>{{ pokemonDetails.name | titlecase }}</h2>
     </ion-label>
 
